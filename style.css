@@ -1,32 +1,46 @@
-:root {
-  --bg-color: #f7f7f7;
-  --text-color: #333;
-  --task-bg: #fff;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body.dark {
-  --bg-color: #1e1e1e;
-  --text-color: #eee;
-  --task-bg: #333;
+:root {
+  --bg-light: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+  --bg-dark: linear-gradient(135deg, #1f1f1f, #3c3c3c);
+  --task-light: #ffffff;
+  --task-dark: #2b2b2b;
+  --accent: #6c5ce7;
+  --text-light: #333;
+  --text-dark: #eee;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg-color);
-  color: var(--text-color);
-  transition: 0.3s;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: all 0.4s ease-in-out;
+}
+
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 
 .container {
   max-width: 500px;
-  margin: 40px auto;
-  padding: 20px;
-  border-radius: 10px;
+  margin: 60px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transition: 0.4s ease;
+}
+
+body.dark .container {
+  background: rgba(43, 43, 43, 0.85);
 }
 
 h1 {
   text-align: center;
+  color: var(--accent);
   margin-bottom: 20px;
 }
 
@@ -37,24 +51,53 @@ h1 {
 
 .task-input input {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  outline: none;
 }
 
 .task-input button {
-  padding: 10px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.task-input button:hover {
+  background: #4834d4;
 }
 
 .filters {
-  margin: 15px 0;
+  margin: 20px 0;
   text-align: center;
 }
 
 .filters button {
   margin: 0 5px;
-  padding: 5px 10px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #dfe6e9;
+  color: #2d3436;
+  font-weight: 500;
   cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filters button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+body.dark .filters button {
+  background: #636e72;
+  color: #dfe6e9;
 }
 
 #task-list {
@@ -63,13 +106,19 @@ h1 {
 }
 
 .task-item {
-  background: var(--task-bg);
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 6px;
+  background: var(--task-light);
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: 0.3s ease;
+}
+
+body.dark .task-item {
+  background: var(--task-dark);
 }
 
 .task-item.completed {
@@ -80,4 +129,18 @@ h1 {
 .task-item span {
   flex: 1;
   cursor: pointer;
+  font-size: 15px;
+}
+
+.task-item button {
+  border: none;
+  background: transparent;
+  color: red;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.task-item button:hover {
+  transform: scale(1.2);
 }

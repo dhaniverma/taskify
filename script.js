@@ -52,3 +52,4 @@ function deleteTask(index) {
 function filterTasks(filter) {
   renderTasks(filter);
 }
+    

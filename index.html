@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Taskify - To-Do App</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Taskify – To-Do List</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>📋 Taskify</h1>
-
+    <h1>📝 Taskify</h1>
+    
     <div class="task-input">
-      <input type="text" id="task" placeholder="Add your task..." />
-      <button onclick="addTask()">➕ Add</button>
+      <input type="text" id="taskInput" placeholder="What do you need to do?">
+      <button onclick="addTask()">Add</button>
     </div>
 
     <div class="filters">
       <button onclick="filterTasks('all')">All</button>
-      <button onclick="filterTasks('active')">Pending</button>
-      <button onclick="filterTasks('completed')">Done</button>
-      <button onclick="toggleTheme()">🌓 Toggle Theme</button>
+      <button onclick="filterTasks('pending')">Pending</button>
+      <button onclick="filterTasks('completed')">Completed</button>
     </div>
 
     <ul id="task-list"></ul>

@@ -1,56 +1,54 @@
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  renderTasks();
-}
+let tasks = [];
 
 function addTask() {
-  const input = document.getElementById("task");
-  const taskText = input.value.trim();
-  if (taskText === "") return;
-  tasks.push({ text: taskText, completed: false });
-  input.value = "";
-  saveTasks();
-}
+  const taskInput = document.getElementById("taskInput");
+  const taskText = taskInput.value.trim();
 
-function toggleTask(index) {
-  tasks[index].completed = !tasks[index].completed;
-  saveTasks();
-}
-
-function deleteTask(index) {
-  tasks.splice(index, 1);
-  saveTasks();
+  if (taskText !== "") {
+    tasks.push({ text: taskText, completed: false });
+    taskInput.value = "";
+    renderTasks();
+  }
 }
 
 function renderTasks(filter = "all") {
   const list = document.getElementById("task-list");
   list.innerHTML = "";
-  tasks.forEach((task, i) => {
+
+  tasks.forEach((task, index) => {
     if (
-      (filter === "active" && task.completed) ||
-      (filter === "completed" && !task.completed)
-    )
-      return;
+      filter === "all" ||
+      (filter === "completed" && task.completed) ||
+      (filter === "pending" && !task.completed)
+    ) {
+      const li = document.createElement("li");
+      li.className = "task-item" + (task.completed ? " completed" : "");
 
-    const li = document.createElement("li");
-    li.className = `task-item ${task.completed ? "completed" : ""}`;
+      const span = document.createElement("span");
+      span.textContent = task.text;
+      span.onclick = () => toggleTask(index);
 
-    li.innerHTML = `
-      <span onclick="toggleTask(${i})">${task.text}</span>
-      <button onclick="deleteTask(${i})">❌</button>
-    `;
-    list.appendChild(li);
+      const delBtn = document.createElement("button");
+      delBtn.innerHTML = "🗑️";
+      delBtn.onclick = () => deleteTask(index);
+
+      li.appendChild(span);
+      li.appendChild(delBtn);
+      list.appendChild(li);
+    }
   });
 }
 
-function filterTasks(mode) {
-  renderTasks(mode);
+function toggleTask(index) {
+  tasks[index].completed = !tasks[index].completed;
+  renderTasks();
 }
 
-function toggleTheme() {
-  document.body.classList.toggle("dark");
+function deleteTask(index) {
+  tasks.splice(index, 1);
+  renderTasks();
 }
 
-renderTasks();
+function filterTasks(filter) {
+  renderTasks(filter);
+}
